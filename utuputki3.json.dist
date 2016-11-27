@@ -14,6 +14,7 @@
         "username": "",
         "password": "",
         "virtualhost": "utuputki3",
+        "heartbeat": 10,
         "ssl": false,
         "verify_ssl": false,
         "minsize": 10,
