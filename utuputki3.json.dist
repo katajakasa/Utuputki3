@@ -1,0 +1,101 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "utuputki3",
+        "username": "utuputki3",
+        "password": "",
+        "minsize": 10,
+        "maxsize": 100
+    },
+    "amqp": {
+        "host": "localhost",
+        "port": 5672,
+        "username": "",
+        "password": "",
+        "virtualhost": "utuputki3",
+        "ssl": false,
+        "verify_ssl": false,
+        "minsize": 10,
+        "maxsize": 100
+    },
+    "mq-link": {
+        "exchange": "utuputki3-direct",
+        "queue-in": "utuputki-in",
+        "queue-out": "utuputki-out"
+    },
+    "web": {
+        "port": 8080,
+        "host": "0.0.0.0"
+    },
+    "debug": false,
+    "logging": {
+        "version": 1,
+        "disable_existing_loggers": false,
+        "formatters": {
+            "console": {
+                "format": "[%(asctime)s][%(levelname)s] %(message)s ",
+                "datefmt": "%d.%m.%Y %I:%M:%S"
+            }
+        },
+        "handlers": {
+            "console": {
+                "level": "DEBUG",
+                "class": "logging.StreamHandler",
+                "formatter": "console"
+            }
+        },
+        "loggers": {
+            "aioamqp.*": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "sqlalchemy": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "alembic": {
+                "handlers": ["console"],
+                "level": "INFO",
+                "propagate": false
+            },
+            "aiohttp.access": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "aiohttp.client": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "aiohttp.internal": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "aiohttp.server": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "aiohttp.web": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "aiohttp.websocket": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            },
+            "": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": false
+            }
+        }
+    }
+}
