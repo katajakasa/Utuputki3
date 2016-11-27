@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
-import argparse
 import os
-from logging.config import dictConfig
-
-from .app import run_app
 
 BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONF_FILENAME = 'utuputki3.json'
@@ -37,26 +33,3 @@ def read_config(override_file=None):
             if config:
                 break
     return config
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Utuputki3 server application')
-    parser.add_argument('--config', type=str, default=None, help='Config file')
-    args = parser.parse_args()
-    override_file = args.config
-
-    # Read the config file
-    config = read_config(override_file)
-    if not config:
-        print("Configuration file not found!")
-        exit(1)
-
-    # Set up logging
-    dictConfig(config['logging'])
-
-    # Run application! Whee!
-    run_app(config)
-
-
-if __name__ == "__main__":
-    main()

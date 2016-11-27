@@ -7,7 +7,7 @@ import sys
 sys.path.append("..")
 sys.path.append(".")
 
-from utuputki3.main import read_config
+from utuputki3.config import read_config
 from utuputki3 import db
 
 app_config = read_config()  # Config from the json file

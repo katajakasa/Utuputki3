@@ -16,11 +16,8 @@ async def index(request):
         # Attempt to run the handler
         try:
             m_uuid = str(uuid1())
-            await db_connection.execute(test_table.insert().values(value=m_uuid))
-
-            # TODO: Add handler here
-
+            await mq_connection.publish({'uuid': m_uuid}, correlation_id=m_uuid)
         except Exception as e:
             log.exception("Error while running handler", exc_info=e)
 
-    return Response(text='Hello')
+    return Response(text='OK')

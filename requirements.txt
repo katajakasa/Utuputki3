@@ -6,3 +6,4 @@ cchardet==1.1.1  # For aiohttp
 arrow==0.8.0
 sqlalchemy==1.1.4
 alembic==0.8.8
+ujson==1.35

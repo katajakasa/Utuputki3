@@ -2,6 +2,7 @@
 
 import logging
 import queue
+import ujson
 
 log = logging.getLogger(__name__)
 
@@ -60,6 +61,30 @@ class MQConnection(object):
         self.exchange = exchange
         self.channel = None
 
+    async def consume(self, callback, consumer_tag):
+        await self.channel.basic_consume(callback, consumer_tag=consumer_tag, queue_name=self.queue_out)
+
+    async def cancel(self, consumer_tag):
+        await self.channel.basic_cancel(consumer_tag=consumer_tag)
+
+    async def publish(self, message, correlation_id):
+        await self.channel.basic_publish(
+            payload=ujson.dumps(message, ensure_ascii=False).encode('utf-8'),
+            exchange_name=self.exchange,
+            routing_key=self.queue_out,
+            mandatory=True,
+            properties={
+                'content_type': 'application/json',
+                'delivery_mode': 2,
+                'correlation_id': correlation_id
+            })
+
+    async def ack(self, delivery_tag):
+        await self.channel.basic_client_ack(delivery_tag=delivery_tag)
+
+    async def nack(self, delivery_tag):
+        await self.channel.basic_client_nack(delivery_tag=delivery_tag)
+
     async def connect(self):
         if not self.channel:
             self.channel = await self.protocol.channel()
@@ -88,6 +113,9 @@ class MQConnection(object):
     async def __aenter__(self):
         await self.connect()
         return self
+
+    def release(self):
+        self.engine.release(self)
 
     async def __aexit__(self, exc_type, exc, tb):
         self.engine.release(self)
