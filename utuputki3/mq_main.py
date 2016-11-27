@@ -6,6 +6,13 @@ from logging.config import dictConfig
 from .mq_app import run_app
 from .config import read_config
 
+try:
+    import uvloop
+    import asyncio
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+except ImportError:
+    pass
+
 
 def main():
     parser = argparse.ArgumentParser(description='Utuputki3 MQ listener application')

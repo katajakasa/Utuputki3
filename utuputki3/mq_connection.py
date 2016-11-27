@@ -83,7 +83,7 @@ class MQConnection(object):
         await self.channel.basic_client_ack(delivery_tag=delivery_tag)
 
     async def nack(self, delivery_tag):
-        await self.channel.basic_client_nack(delivery_tag=delivery_tag)
+        await self.channel.basic_client_nack(delivery_tag=delivery_tag, requeue=False)
 
     async def connect(self):
         if not self.channel:
