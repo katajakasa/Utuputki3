@@ -37,6 +37,9 @@
             "console": {
                 "format": "[%(asctime)s][%(levelname)s] %(message)s ",
                 "datefmt": "%d.%m.%Y %I:%M:%S"
+            },
+            "access_log": {
+                "format": "%(message)s"
             }
         },
         "handlers": {
@@ -44,6 +47,11 @@
                 "level": "DEBUG",
                 "class": "logging.StreamHandler",
                 "formatter": "console"
+            },
+            "access_log": {
+                "level": "INFO",
+                "class": "logging.StreamHandler",
+                "formatter": "access_log"
             }
         },
         "loggers": {
@@ -63,8 +71,8 @@
                 "propagate": false
             },
             "aiohttp.access": {
-                "handlers": ["console"],
-                "level": "DEBUG",
+                "handlers": ["access_log"],
+                "level": "INFO",
                 "propagate": false
             },
             "aiohttp.client": {
