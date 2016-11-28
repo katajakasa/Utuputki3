@@ -16,9 +16,7 @@ log = logging.getLogger(__name__)
 
 def run_app(config):
     loop = asyncio.get_event_loop()
-    app = web.Application(
-        loop=loop,
-        debug=config['debug'])
+    app = web.Application(loop=loop, debug=config['debug'])
     app['config'] = config
 
     # Startup and shutdown callbacks

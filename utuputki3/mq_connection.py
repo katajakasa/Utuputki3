@@ -62,13 +62,16 @@ class MQConnection(object):
         self.channel = None
 
     async def consume(self, callback, consumer_tag):
-        await self.channel.basic_consume(callback, consumer_tag=consumer_tag, queue_name=self.queue_out)
+        await self.channel.basic_consume(
+            callback,
+            consumer_tag=consumer_tag,
+            queue_name=self.queue_out)
 
     async def cancel(self, consumer_tag):
         await self.channel.basic_cancel(consumer_tag=consumer_tag)
 
     async def publish(self, message, correlation_id):
-        await self.channel.basic_publish(
+        await self.channel.publish(
             payload=ujson.dumps(message, ensure_ascii=False).encode('utf-8'),
             exchange_name=self.exchange,
             routing_key=self.queue_out,
@@ -109,6 +112,7 @@ class MQConnection(object):
                 exchange_name=self.exchange,
                 queue_name=self.queue_out,
                 routing_key=self.queue_out)
+            await self.channel.confirm_select()
 
     async def __aenter__(self):
         await self.connect()
