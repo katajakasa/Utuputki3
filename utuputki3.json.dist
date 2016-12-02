@@ -8,27 +8,6 @@
         "minsize": 10,
         "maxsize": 100
     },
-    "amqp": {
-        "host": "localhost",
-        "port": 5672,
-        "username": "",
-        "password": "",
-        "virtualhost": "utuputki3",
-        "heartbeat": 10,
-        "ssl": false,
-        "verify_ssl": false,
-        "minsize": 10,
-        "maxsize": 100
-    },
-    "mq-link": {
-        "exchange": "utuputki3-direct",
-        "queue-in": "utuputki-in",
-        "queue-out": "utuputki-out"
-    },
-    "web": {
-        "port": 8080,
-        "host": "0.0.0.0"
-    },
     "debug": false,
     "logging": {
         "version": 1,
@@ -55,11 +34,6 @@
             }
         },
         "loggers": {
-            "aioamqp.*": {
-                "handlers": ["console"],
-                "level": "DEBUG",
-                "propagate": false
-            },
             "sqlalchemy": {
                 "handlers": ["console"],
                 "level": "DEBUG",
