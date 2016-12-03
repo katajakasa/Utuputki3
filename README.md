@@ -22,13 +22,13 @@ Python 3.5 and PostgreSQL
 This only works on linux, and you need to have the uvloop python package installed.
 Easily the fastest solution. To install the missing package, run `pip install uvloop`.
 
-`gunicorn utuputki3.app:get_app --worker-class aiohttp.worker.GunicornUVLoopWebWorker --bind localhost:8080`
+`gunicorn utuputki3.gu_app:app --worker-class aiohttp.worker.GunicornUVLoopWebWorker --bind localhost:8080`
 
 ### 2. Production, without uvloop
 
 Second best solution, again only works on linux.
 
-`gunicorn utuputki3.app:get_app --worker-class aiohttp.worker.GunicornWebWorker --bind localhost:8080`
+`gunicorn utuputki3.gu_app:app --worker-class aiohttp.worker.GunicornWebWorker --bind localhost:8080`
 
 ### 3. Testing or for windows
 
