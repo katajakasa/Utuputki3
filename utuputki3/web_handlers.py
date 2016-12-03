@@ -48,10 +48,7 @@ async def websocket_handler(request):
         session = Session(db)
         async for msg in ws:
             if msg.type == WSMsgType.TEXT:
-                if msg.data == 'close':
-                    await ws.close()
-                else:
-                    await process_request(msg.data, session, db, request.app['sockets'], ws)
+                await process_request(msg.data, session, db, request.app['sockets'], ws)
             elif msg.type == WSMsgType.ERROR:
                 log.error("WS: Socket error: %s", ws.exception())
 
