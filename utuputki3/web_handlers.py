@@ -31,9 +31,9 @@ async def process_request(data, session, db, sockets, ws):
     # Handle the request (or at least make an attempt)
     request = Request(message, session, db, sockets, ws, receipt, route)
     try:
-        handlers[route](request)
+        await handlers[route](request)
     except KeyError:
-        request.send_error({
+        await request.send_error({
             'message': 'Server error',
         }, code=ErrorCode.SERVER_ERROR)
         log.exception("Route does not exist!")

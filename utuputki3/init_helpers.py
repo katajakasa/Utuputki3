@@ -26,9 +26,6 @@ async def init_db(app):
 async def init_sockets(app):
     app['sockets'] = SockHandler()
 
-async def close_sockets(app):
-    app['sockets'].close()
-
 async def close_db(app):
     await app['db'].close()
     log.info("DB: Connection closed")

@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
 
 
-def login(request):
+async def login(request):
+    request.broadcast({'test': 'test'})
+
+
+async def logout(request):
+    request.send_message({'test': 'test2'})
+
+
+async def authenticate(request):
     pass
 
 
-def logout(request):
+async def register(request):
     pass
 
 
-def authenticate(request):
+async def update_profile(request):
+    pass
+
+
+async def get_profile(request):
     pass

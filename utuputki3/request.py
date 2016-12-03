@@ -25,24 +25,24 @@ class Request(object):
         self.receipt = receipt
         self.route = route
 
-    async def broadcast(self, message, avoid_self=False, route=None):
+    def broadcast(self, message, avoid_self=False, route=None):
         data = {'message': message, 'error': False}
         if route or self.route:
             data['route'] = route or self.route
-        await self._sockets.broadcast(ujson.dumps(data), avoid_sock=self._ws if avoid_self else None)
+        self._sockets.broadcast(ujson.dumps(data), avoid_sock=self._ws if avoid_self else None)
 
-    async def send_message(self, message, receipt=None, route=None):
+    def send_message(self, message, receipt=None, route=None):
         data = {'message': message, 'error': False}
         if receipt or self.receipt:
             data['receipt'] = receipt or self.receipt
         if route or self.route:
             data['route'] = route or self.route
-        await self._ws.send_str(ujson.dumps(data))
+        self._ws.send_str(ujson.dumps(data))
 
-    async def send_error(self, error_messages, code, receipt=None, route=None):
+    def send_error(self, error_messages, code, receipt=None, route=None):
         data = {'message': {'error_code': code, 'error_messages': error_messages}, 'error': True}
         if receipt or self.receipt:
             data['receipt'] = receipt or self.receipt
         if route or self.route:
             data['route'] = route or self.route
-        await self._ws.send_str(ujson.dumps(data))
+        self._ws.send_str(ujson.dumps(data))

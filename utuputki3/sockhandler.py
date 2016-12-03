@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import asyncio
+
 
 class SockHandler(object):
     def __init__(self):
