@@ -56,5 +56,6 @@ async def websocket_handler(request):
                 log.error("WS: Socket error: %s", ws.exception())
 
     request.app['sockets'].del_socket(ws)
+    await ws.close()
     log.info("WS: Connection closed.")
     return ws
